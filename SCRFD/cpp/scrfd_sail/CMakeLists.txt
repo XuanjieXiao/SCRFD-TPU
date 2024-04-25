@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(scrfd_sail)
-include(${CMAKE_SOURCE_DIR}/../../../../cmake/common.cmake)
+include(${CMAKE_SOURCE_DIR}/../../../cmake/common.cmake)
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})
 # SET(CMAKE_BUILD_TYPE "Debug")
@@ -28,7 +28,7 @@ if (${TARGET_ARCH} STREQUAL "pcie")
     include_directories(${LIBSOPHON_INCLUDE_DIRS})
     link_directories(${LIBSOPHON_LIB_DIRS})
 
-    include_directories("../../../../include/")
+    include_directories("../../../include/")
 
     # use sail
     set(SAIL_PATH /opt/sophon/sophon-sail)
@@ -45,7 +45,7 @@ if (${TARGET_ARCH} STREQUAL "pcie")
     # message(STATUS ${FFMPEG_LIB_DIRS})
  
     aux_source_directory(. SRC_FILES)
-    aux_source_directory(../../../../src/ SRC_FILES)
+    aux_source_directory(../../../src/ SRC_FILES)
     add_executable(scrfd_sail.pcie ${SRC_FILES})
     target_link_libraries(scrfd_sail.pcie ${FFMPEG_LIBS} ${OpenCV_LIBS} ${SAIL_LIBS} ${the_libbmlib.so} ${the_libbmrt.so} ${the_libbmcv.so} -lpthread)
  
@@ -58,7 +58,7 @@ elseif (${TARGET_ARCH} STREQUAL "soc")
     set(BM_LIBS bmlib bmrt bmcv yuv)
     set(OPENCV_LIBS opencv_imgproc opencv_core opencv_highgui opencv_imgcodecs opencv_videoio)
 
-    include_directories("../../../../include/")
+    include_directories("../../../include/")
     
     message("SOC-SDK: ${SDK}")
     include_directories("${SDK}/include/")
